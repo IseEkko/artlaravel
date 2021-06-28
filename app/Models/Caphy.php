@@ -11,6 +11,7 @@ class Caphy extends Model
     protected $primaryKey = "caphy_id";
     protected $guarded = [];
 
+
     /*** 书法作品信息入库
      * @author zuoshengyu
      * @param $vocality_type
@@ -58,4 +59,5 @@ class Caphy extends Model
             return null;
         }
     }
+
 }

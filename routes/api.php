@@ -26,6 +26,7 @@ Route::prefix('user')->group(function () {
     Route::post('registered', 'LoginController@registered'); //管理员注册
 });//--lzz
 
+
 Route::prefix('art')->namespace('Art')->group(function () {
     Route::post('vocalmusic', 'ArtController@vocalmusic'); //声乐作品入库
     Route::post('vguidance', 'ArtController@vguidance');//声乐作品指导老师入库
@@ -66,3 +67,13 @@ Route::prefix('artp')->namespace('Artp')->group(function () {
     Route::post('fauth', 'ArtpController@fauth');//微电影作品作者入库
 
 });//--zsy
+
+Route::prefix('pauther')->namespace('Pauther')->group(function () {
+    Route::post('paintingcreat', 'PrpaintingController@creatPrpain'); //校长绘画作品上传
+    Route::post('caphycreat', 'CaphyController@creatCaphy'); //校长书法作品上传
+    Route::post('phophycreat', 'PhophyController@creatPphphy'); //校长摄影作品上
+    Route::post('casecreat', 'CaseController@lzzcreatcase'); //工作坊作品上传
+    Route::post('whorkshopcreat', 'WorkShopController@workshop'); //工作坊作品上传
+    Route::post('theashopcreat', 'WorkShopController@creatworkuer'); //工作坊作品教师上传
+});//--lzz
+
