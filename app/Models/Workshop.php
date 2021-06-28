@@ -1,4 +1,13 @@
 <?php
+/*
+ * @Author: Alexcutest
+ * @Date: 2021-06-28 11:29:08
+ * @LastEditTime: 2021-06-28 16:59:07
+ * @LastEditors: Alexcutest
+ * @Description: 
+ * @FilePath: /artlaravel-1/app/Models/Workshop.php
+ * Learn and live
+ */
 
 namespace App\Models;
 
@@ -73,5 +82,90 @@ class Workshop extends Model
             logError('工作坊信息查询错误',[$e->getMessage()]);
         }
     }
+
+
+    /**
+     * @Author: Alexcutest
+     * @description: 
+     * @param {*}
+     * @return {*}
+     */
+
+    public static function wor_show($opus_status)
+    {
+        try {
+            if ($opus_status == 0) {
+
+                $res = Workshop::where('workshop_status', '=', 0)
+                    ->select('workshop_id', 'workshop_name', 'contact_name', 'contact_number', 'contact_address', 'workshop_number', 'workshop_status')
+                    ->get();
+
+                return $res ?
+                    $res :
+                    false;
+            } elseif ($opus_status == 1) {
+
+
+                $res = Workshop::where('opus_status', '=', 0)
+                    ->select('workshop_id', 'workshop_name', 'contact_name', 'contact_number', 'contact_address', 'workshop_number', 'workshop_status')
+                    ->get();
+                return $res ?
+                    $res :
+                    false;
+            }
+        } catch (\Exception $e) {
+            logError('搜索错误', [$e->getMessage()]);
+            return false;
+        }
+    }
+
+
+    /**
+     * @Author: Alexcutest
+     * @description: 艺术工坊删除
+     * @param {*} $opus_id
+     * @return {*}
+     */
+    public static function wor_delete($opus_id)
+    {
+        try {
+
+            $res = Workshop::where('workshop_id', '=', $opus_id)
+                ->delete();
+
+
+            return $res ?
+                $res :
+                false;
+        } catch (\Exception $e) {
+            logError('搜索错误', [$e->getMessage()]);
+            return false;
+        }
+    }
+
+
+
+    /**
+     * @Author: Alexcutest
+     * @description: 搜索
+     * @param {*} $opus_name
+     * @return {*}
+     */
+    public static function search_show($opus_name)
+    {
+        try {
+            $res = Workshop::where('workshop_name', '=', $opus_name)
+                ->select('workshop_id', 'workshop_name', 'contact_name', 'contact_number', 'contact_address', 'workshop_number', 'workshop_status')
+                ->get();
+
+            return $res ?
+                $res :
+                false;
+        } catch (\Exception $e) {
+            logError('搜索错误', [$e->getMessage()]);
+            return false;
+        }
+    }
+    
 
 }
