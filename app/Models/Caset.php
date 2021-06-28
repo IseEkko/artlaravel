@@ -1,4 +1,13 @@
 <?php
+/*
+ * @Author: Alexcutest
+ * @Date: 2021-06-28 11:29:08
+ * @LastEditTime: 2021-06-28 16:50:27
+ * @LastEditors: Alexcutest
+ * @Description: 
+ * @FilePath: /artlaravel-1/app/Models/Caset.php
+ * Learn and live
+ */
 
 namespace App\Models;
 
@@ -30,6 +39,89 @@ class Caset extends Model
             return $data;
         } catch(\Exception $e){
             logError('工作坊作品信息上传错误',[$e->getMessage()]);
+        }
+    }
+
+    /**
+     * @Author: Alexcutest
+     * @description: 优秀案例展示
+     * @param {*} $opus_status
+     * @return {*}
+     */
+    public static function cas_show($opus_status)
+    {
+        try {
+            if ($opus_status == 0) {
+
+                $res = Caset::where('case_status', '=', 0)
+                    ->select('case_id', 'case_name', 'contact_name', 'contact_number', 'contact_email', 'case_status')
+                    ->get();
+
+
+                return $res ?
+                    $res :
+                    false;
+            } elseif ($opus_status == 1) {
+
+                $res = Caset::where('case_status', '=', 1)
+                    ->select('case_id', 'case_name', 'contact_name', 'contact_number', 'contact_email', 'case_status')
+                    ->get();
+
+
+                return $res ?
+                    $res :
+                    false;
+            }
+        } catch (\Exception $e) {
+            logError('搜索错误', [$e->getMessage()]);
+            return false;
+        }
+    }
+
+    /**
+     * @Author: Alexcutest
+     * @description: 优秀案例删除
+     * @param {*} $opus_id
+     * @return {*}
+     */
+    public static function cas_delete($opus_id)
+    {
+        try {
+
+            $res = Caset::where('case_id', '=', $opus_id)
+                ->delete();
+
+
+            return $res ?
+                $res :
+                false;
+        } catch (\Exception $e) {
+            logError('搜索错误', [$e->getMessage()]);
+            return false;
+        }
+    }
+
+
+
+    /**
+     * @Author: Alexcutest
+     * @description: 搜索
+     * @param {*} $opus_name
+     * @return {*}
+     */
+    public static function search_show($opus_name)
+    {
+        try {
+            $res = Caset::where('case_name', '=', $opus_name)
+                ->select('case_id', 'case_name', 'contact_name', 'contact_number', 'contact_email', 'case_status')
+                ->get();
+
+            return $res ?
+                $res :
+                false;
+        } catch (\Exception $e) {
+            logError('搜索错误', [$e->getMessage()]);
+            return false;
         }
     }
 }
